@@ -29,7 +29,7 @@ func (l *Logic) Index(c *gin.Context) {
 	}
 	err = db.Count(&count).Error
 	if err != nil {
-		http.Alert400(c, http.StatusBadRequest, err.Error())
+		http.Alert400(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -39,7 +39,7 @@ func (l *Logic) Index(c *gin.Context) {
 		Order("id DESC").
 		Find(&list).Error
 	if err != nil {
-		http.Alert400(c, http.StatusBadRequest, err.Error())
+		http.Alert400(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -56,10 +56,13 @@ func (l *Logic) Show(c *gin.Context) {
 		http.Alert400(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	// TODO: Your logic.
-
-	// TODO: Replace your return struct.
-	http.SuccessWithData(c, params.Data())
+	info := model.NewUser()
+	err = database.DB.Model(info).Where("id = ?", params.Data().Id).First(info).Error
+	if err != nil {
+		http.Alert400(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	http.SuccessWithData(c, info)
 }
 
 // Create Save one source

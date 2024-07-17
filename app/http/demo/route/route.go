@@ -12,14 +12,18 @@ func RegisterDemoAPI(r *gin.Engine) {
 		middleware.Auth(),
 	)
 
-	r.Group("user")
+	// API 分组
+	v1 := r.Group("v1")
+
+	// 用户
+	u := v1.Group("user")
 	{
 		userLogic := user.NewLogic()
-		r.GET("", userLogic.Index)
-		r.GET(":id", userLogic.Show)
-		r.POST("", userLogic.Create)
-		r.PUT(":id", userLogic.Update)
-		r.DELETE(":id", userLogic.Destroy)
+		u.GET("", userLogic.Index)
+		u.GET(":id", userLogic.Show)
+		u.POST("", userLogic.Create)
+		u.PUT(":id", userLogic.Update)
+		u.DELETE(":id", userLogic.Destroy)
 	}
 
 }

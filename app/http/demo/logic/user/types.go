@@ -24,6 +24,15 @@ import (
 //	return
 //}
 
+type Info struct {
+	Username string `json:"username" gorm:"column:username" validate:"required,max=100"` // 用户名称
+	Password string `json:"password" gorm:"column:password" validate:"required,max=60"`  // 密码
+	Avatar   string `json:"avatar" gorm:"column:avatar" validate:"omitempty,max=255"`    // 头像
+	Phone    string `json:"phone" gorm:"column:phone" validate:"required,max=11,phone"`  // 电话号码
+	Email    string `json:"email" gorm:"column:email" validate:"omitempty,max=255"`      // 邮箱
+	Gender   uint8  `json:"gender" gorm:"column:gender" validate:"omitempty,numeric"`    // 性别：0-未知、1-男、2-女
+}
+
 type Index struct {
 	Page     int     `form:"page" validate:"numeric,min=1"`
 	Size     int     `form:"size" validate:"numeric,min=1,max=100"`
@@ -57,7 +66,7 @@ func (r *Show) ParseAndCheckParams(c *gin.Context) (err error) {
 }
 
 type Create struct {
-	// TODO: add your params.
+	Info
 }
 
 func (r *Create) ParseAndCheckParams(c *gin.Context) (err error) {
