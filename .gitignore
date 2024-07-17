@@ -1,0 +1,8 @@
+# IDE 和编辑器
+.idea
+.vscode
+/**/.DS_Store
+
+# 日志文件
+app/**/storage
+storage/*.log
