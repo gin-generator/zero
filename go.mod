@@ -3,7 +3,7 @@ module github.com/gin-generator/zero
 go 1.21.12
 
 require (
-	github.com/gin-generator/ginctl v1.1.0
+	github.com/gin-generator/ginctl v1.1.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/spf13/cast v1.6.0
