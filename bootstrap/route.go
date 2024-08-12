@@ -3,7 +3,7 @@ package bootstrap
 import (
 	demo "github.com/gin-generator/zero/app/http/demo/route"
 	middlewares "github.com/gin-generator/zero/middleware"
-	http "github.com/gin-generator/zero/package/respond"
+	"github.com/gin-generator/zero/package/respond"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,7 +18,7 @@ func RegisterGlobalMiddleware(r *gin.Engine) {
 
 func RegisterDemoApiRoute(router *gin.Engine) {
 	// route not found.
-	http.Alert404Route(router)
+	respond.Alert404Route(router)
 	// global middleware.
 	RegisterGlobalMiddleware(router)
 	// Initialize route.
